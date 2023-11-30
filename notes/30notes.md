@@ -401,5 +401,8 @@ $$
 
 ## Forelesning 2
 ### Dynamiske tabeller 
-- Når man setter element i hashtabell, stakk eller kø som er full må man allokere nytt minne og kopiere inn elementene. Tar lineær tid, så gjør sjeldent.,
-
+- Når man setter element i hashtabell, stakk eller kø som er full må man allokere nytt minne og kopiere inn elementene. Tar lineær tid, så gjør sjeldent.
+- <span style="color: tomato">Antall elementer som settes inn før ny tabell blir full</span> og <span style="color: dodgerblue">antall elementer som kopieres fra gammel tabell</span> blir doblet
+    - Bruker $\sum_{i=0}^{h-1}2^i=2^h-1$ og finner total kostnad $3n-2$, da $h=\lg(n)$
+    
+<img src="assets/assets30/dynamicTables.png" height="200px">
