@@ -12,7 +12,7 @@ I am also planning on having a seperate section for all algorithms in our curric
 |[Algorithms](notes/algorithmsNotes)|In progress |Algorithms                    |
 |[Good to know](notes/gtkNotes)     |In progress |Good to know for exam         |    
 |[29.11](notes/29notes)             |Posted      |Problems and algorithms       |
-|[30.11](notes/30notes)             |Not reviewed|                              |
+|[30.11](notes/30notes)             |In progress |Datastructures
 |[01.12](notes/01notes)             |Not reviewed|                              |
 |[02.12](notes/02notes)             |Not reviewed|                              |
 |[03.12](notes/03notes)             |Not reviewed|                              |
@@ -27,3 +27,5 @@ I am also planning on having a seperate section for all algorithms in our curric
 
 ## Shoutouts
 Here I will post the people who has particularly helped me, and links to their work if applicable and/or if I get their permission to.
+
+First shoutout goes to an anonymous hero for writing a great compendium. I am basing most of my Norwegian notes on their compendium, and have been allowed to post my notes. Contact me if you want the compendium, at hanlun0804@outlook.com.
