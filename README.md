@@ -10,20 +10,20 @@ I am also planning on having a seperate section for all algorithms in our curric
 |Notes                              |Status      |Topic                         |
 |-----------------------------------|------------|------------------------------|
 |[Algorithms](notes/algorithmsNotes.md)|In progress |Algorithms                    |
-|[Good to know](notes/gtkNotes)     |In progress |Good to know for exam         |    
-|[29.11](notes/29notes)             |Posted      |Problems and algorithms       |
-|[30.11](notes/30notes)             |Posted |Datastructures
-|[01.12](notes/01notes)             |Not reviewed|                              |
-|[02.12](notes/02notes)             |Not reviewed|                              |
-|[03.12](notes/03notes)             |Not reviewed|                              |
-|[04.12](notes/04notes)             |Not reviewed|                              |
-|[05.12](notes/05notes)             |Not reviewed|                              |
-|[06.12](notes/06notes)             |Not reviewed|                              |
-|[07.12](notes/07notes)             |Not reviewed|                              |
-|[08.12](notes/08notes)             |Not reviewed|                              |
-|[09.12](notes/09notes)             |Not reviewed|                              |
-|[10.12](notes/10notes)             |Not reviewed|                              |
-|[11.12](notes/11notes)             |Not reviewed|                              |
+|[Good to know](notes/gtkNotes.md)     |In progress |Good to know for exam         |    
+|[29.11](notes/29notes.md)             |Posted      |Problems and algorithms       |
+|[30.11](notes/30notes.md)             |Posted |Datastructures
+|[01.12](notes/01notes.md)             |Not reviewed|                              |
+|[02.12](notes/02notes.md)             |Not reviewed|                              |
+|[03.12](notes/03notes.md)             |Not reviewed|                              |
+|[04.12](notes/04notes.md)             |Not reviewed|                              |
+|[05.12](notes/05notes.md)             |Not reviewed|                              |
+|[06.12](notes/06notes.md)             |Not reviewed|                              |
+|[07.12](notes/07notes.md)             |Not reviewed|                              |
+|[08.12](notes/08notes.md)             |Not reviewed|                              |
+|[09.12](notes/09notes.md)             |Not reviewed|                              |
+|[10.12](notes/10notes.md)             |Not reviewed|                              |
+|[11.12](notes/11notes.md)             |Not reviewed|                              |
 
 ## Shoutouts
 Here I will post the people who has particularly helped me, and links to their work if applicable and/or if I get their permission to.
