@@ -9,7 +9,7 @@ I am also planning on having a seperate section for all algorithms in our curric
 ## Notes
 |Notes                              |Status      |Topic                         |
 |-----------------------------------|------------|------------------------------|
-|[Algorithms](notes/algorithmsNotes)|In progress |Algorithms                    |
+|[Algorithms](notes/algorithmsNotes.md)|In progress |Algorithms                    |
 |[Good to know](notes/gtkNotes)     |In progress |Good to know for exam         |    
 |[29.11](notes/29notes)             |Posted      |Problems and algorithms       |
 |[30.11](notes/30notes)             |Posted |Datastructures
