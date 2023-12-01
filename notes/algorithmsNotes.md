@@ -1,7 +1,26 @@
 # Table of contents
 - [Sorting algorithms](#sorting-algorithms)
     - [Insertion sort](#insertion-sort)
-- []
+- [Stack functions](#stack-functions)
+    - [STACK-EMPTY](#stack-empty)    
+    - [PUSH](#push)    
+    - [POP](#pop)
+- [Queue functions](#queue-functions)
+    - [ENQUEUE](#enqueue)
+    - [DEQUEUE](#dequeue)
+- [List functions](#list-functions)
+    - [LIST-SEARCH](#list-search)
+    - [LIST-INSERT](#list-insert)
+- [Hash functions](#hash-functions)
+    - [HASH-INSERT](#hash-insert)
+    - [HASH-SEARCH](#hash-search)
+    - [CHAINED-HASH-INSERT](#chained-hash-insert)
+    - [CHAINED-HASH-SEARCH](#chained-hash-search)
+    - [CHAINED-HASH-DELETE](#chained-hash-delete)
+- [Direct access table functions](#direct-access-table-functions)
+    - [DIRECT-ADDRESS-SEARCH](#direct-address-search)
+    - [DIRECT-ADDRESS-INSERT](#direct-address-insert)
+    - [DIRECT-ADDRESS-DELETE](#direct-address-delete)
 - [Template for algorithms](#template-for-algortihms)
 
 # Sorting algorithms
@@ -158,11 +177,230 @@ Set `x` to be the head of the queue. Checks if this is the last element of the a
 ### Runtime
 $O(1)$
 
-## ENQUEUE
+
+# List functions
+
+## LIST-SEARCH
 ### When to use
+When you want to search for an item (its key value) in a linked list
 ### Inputs/outputs
+- Inputs: `L` - list to search through, `k` - key you want to search for
+- Output: Pointer to `k`
 ### Pseudocode/explanation
+#### Pseudocode
+```
+LIST-SEARCH(L,k)
+1 x = L.head
+2 while x ≠ NIL and x.key ≠ k
+3   x = x.next
+4 return x
+```
+#### Explanation
+`L.head` is saved in `x`. Checks that `x` isn't NIL (end of list) or that `x.key` isn't `k` (then we found `k`). Returns `x`. 
+
 ### Runtime
+$O(1)$
+
+
+
+## LIST-INSERT
+### When to use
+When you want to insert an item at the front of a linked list
+### Inputs/outputs
+- Input: `L` - List you want to insert item to, `x` - pointer to element we want to insert
+### Pseudocode/explanation
+#### Pseudocode
+```
+LIST-INSERT(L,x)
+1 x.next = L.head
+2 if L.head ≠ NIL
+3   L.head.prev = x
+4 L.head = x
+5 x.prev = NIL
+```
+#### Explanation
+`x.next` is set to `L.head`. This makes sure `x` points to the previously first element. If `L.head` isn't NIL, `L.head.prev` is set to `x`. If `L.head` is NIL, `L` is empty. `L.head` is then set to `x`, and `x.prev` is set to NIL.
+### Runtime
+$O(1)$
+
+# Hash functions
+
+## HASH-INSERT
+### When to use
+When inserting a key into a hash table using open addressing and linear probing.
+
+### Inputs/outputs
+- Input: `T` - Hash table, `k` - Key to be inserted.
+- Output: The index `j` where `k` was inserted.
+
+### Pseudocode/explanation
+#### Pseudocode
+```
+HASH-INSERT(T,k)
+1 i = 0
+2 repeat
+3   j = h(k,i)
+4   if T[j] == NIL
+5       T[j] = k
+6       return j
+7   else i = i + 1
+8 until i == m 
+9 error "hash table overflow"
+```
+### Runtime
+- Average case: $O(1)$
+- Worst case: $O(m)$
+
+## HASH-SEARCH
+### When to use
+When searching for a key in a hash table that uses open addressing.
+### Inputs/outputs
+- Input: `T` - Hash table, `k` - Key to search for.
+- Output: Index of the key if found, NIL otherwise.
+### Pseudocode/explanation
+#### Pseudocode
+```
+HASH-SEARCH(T,k)
+1 i = 0
+2 repeat
+3   j = h(k,i)
+4   if T[j] == k 
+5       return j
+6   i = i + 1
+7 until T[j] == NIL or i == m
+8 return NIL
+```
+#### Explanation
+The function searches for key `k` using the hash function `h(k,i)` and linear probing. If `k` is found at `T[j]`, its index is returned. If a NIL slot is encountered or after `m` attempts without finding `k`, the search returns NIL.
+### Runtime
+- Average case: $O(1)$
+- Worst case: $O(m)$
+
+## CHAINED-HASH-INSERT
+### When to use
+When inserting an element into a hash table that uses chaining to resolve collisions.
+### Inputs/outputs
+- Input: T - Hash table, x - Element to be inserted.
+### Pseudocode/explanation
+#### Pseudocode
+```
+CHAINED-HASH-INSERT(T,x)
+1 insert x at the head of list T[h(x.key)]
+```
+#### Explanation
+This function inserts the element x at the head of the linked list at the index determined by hashing x.key. It's used when collisions in the hash table are resolved by chaining.
+### Runtime
+- Average case: $O(1)$
+- Worst case: $O(n)$
+
+
+
+## CHAINED-HASH-SEARCH
+### When to use
+When searching for an element with a specific key in a hash table using chaining.
+### Inputs/outputs
+- Input: `T` - Hash table, `k` - Key of the element to search for.
+- Output: The element with key `k` if found, NIL otherwise.
+### Pseudocode/explanation
+#### Pseudocode
+```
+CHAINED-HASH-SEARCH(T,k)
+1 search for an element with key k in list T[h(k)]
+```
+#### Explanation
+Searches for an element with key k in the linked list at the index determined by hashing k. It's suitable for hash tables that use chaining to resolve collisions.
+### Runtime
+- Average case: $O(1)$
+- Worst case: $O(n)$
+
+
+## CHAINED-HASH-DELETE
+### When to use
+When you need to delete an element from a hash table that uses chaining for collision resolution.
+### Inputs/outputs
+- Input: `T` - Hash table, `x` - Element to be deleted.
+### Pseudocode/explanation
+#### Pseudocode
+```
+CHAINED-HASH-DELETE(T.x)
+1 delete x from the list T[h(x.key)]
+```
+#### Explanation
+Removes the element `x` from the linked list at the index determined by hashing `x.key`. This function is used in hash tables with chaining.
+### Runtime
+- Average case: $O(1)$
+- Worst case: $O(n)$
+
+
+
+
+
+
+# Direct access table functions
+
+## DIRECT-ADDRESS-SEARCH
+### When to use
+When you need to retrieve an element from a direct address table using its key.
+
+### Inputs/outputs
+- Input: `T` - Direct address table, `k` - Key of the element to retrieve.
+- Output: The element with key `k` if it exists in the table, `NIL` otherwise.
+
+### Pseudocode/explanation
+#### Pseudocode
+```
+DIRECT-ADDRESS-SEARCH(T,k)
+1 return T[k]
+```
+#### Explanation
+This function simply returns the element at the slot in the table `T` that corresponds to the key `k`. It's a straightforward lookup operation.
+
+### Runtime
+$O(1)$
+
+
+## DIRECT-ADDRESS-INSERT
+### When to use
+When you need to insert an element into a direct address table.
+
+### Inputs/outputs
+- Input: `T` - Direct address table, `x` - Element to be inserted.
+- Output: None (element `x` is inserted in the table `T`).
+
+### Pseudocode/explanation
+#### Pseudocode
+
+```
+DIRECT-ADDRESS-INSERT(T,x)
+1 T[x.key] = x
+```
+#### Explanation
+This function places the element `x` into the slot in table `T` that corresponds to `x.key`. It's a direct mapping from the key to the slot in the table.
+
+### Runtime
+$O(1)$
+
+## DIRECT-ADDRESS-DELETE
+### When to use
+When you need to delete an element from a direct address table, where each possible key has a dedicated slot.
+### Inputs/outputs
+- Input: T - Direct address table, x - Element to be deleted.
+- Output: Modified table with the element removed.
+### Pseudocode/explanation
+#### Pseudocode
+```
+DIRECT-ADDRESS-DELETE(T,x)
+1 T[x.key] = NIL
+```
+#### Explanation
+Searches for an element with key k in the linked list at the index determined by hashing k. It's suitable for hash tables that use chaining to resolve collisions.
+### Runtime
+- Average case: $O(1)$
+- Worst case: $O(n)$
+
+
+
+
 
 
 
