@@ -5,6 +5,8 @@
     - [Merge-Sort](#merge-sort)
     - [Partition](#partition)
     - [Quicksort](#quicksort)
+    - [Randomized partition](#randomized-partition)
+    - [Randomized quicksort](#randomized-quicksort)
 - [Stack functions](#stack-functions)
     - [STACK-EMPTY](#stack-empty)    
     - [PUSH](#push)    
@@ -199,6 +201,54 @@ QUICKSORT(A, p, r)
 - Average case: $O(n\log(n))$
 - Worst case: $O(n²)$
 
+### Other info
+Sorts in place
+
+## Randomized partition
+### When to use
+In quicksort, when you want to improve the average-case performance and reduce the likelihood of worst-case scenarios. This function randomizes the selection of the pivot.
+
+### Inputs/outputs
+- Input: A - An array, p - Starting index, r - Ending index.
+- Output: The index of the pivot after partitioning the array.
+
+### Pseudocode/explanation
+#### Pseudocode
+```
+RANDOMIZED-PARTITION(A, p, r)
+1 i = RANDOM(p, r)
+2 exchange A[r] with A[i]
+3 return PARTITION(A, p, r)
+```
+#### Explanation
+- Selects random number in the range that should be sorted, swaps that with the last element to be sorted and runs `PARTITION`
+
+### Runtime
+$O(n)$ (more spesifically $O(r-p+1)$)
+
+## Randomized quicksort
+### When to use
+In scenarios where an average-case efficient sorting algorithm is required and where there is a risk of encountering worst-case scenarios with regular quicksort due to specific input patterns.
+### Inputs/outputs
+- Input: A - An array, p - Starting index, r - Ending index.
+- Output: The array A, sorted between indices p and r.
+### Pseudocode/explanation
+#### Pseudocode
+```
+RANDOMIZED-QUICKSORT(A, p, r)
+1 if p < r
+2    q = RANDOMIZED-PARTITION(A, p, r)
+3    RANDOMIZED-QUICKSORT(A, p, q-1)
+4    RANDOMIZED-QUICKSORT(A, q+1, r)
+```
+#### Explanation
+- Runs quicksort, but with random pivot element
+
+### Runtime
+-  $O(n \log n)$
+
+### Other info
+Sorts in place
 
 # Stack functions
 
