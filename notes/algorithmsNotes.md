@@ -1,6 +1,10 @@
 # Table of contents
 - [Sorting algorithms](#sorting-algorithms)
     - [Insertion sort](#insertion-sort)
+    - [Merge](#merge)
+    - [Merge-Sort](#merge-sort)
+    - [Partition](#partition)
+    - [Quicksort](#quicksort)
 - [Stack functions](#stack-functions)
     - [STACK-EMPTY](#stack-empty)    
     - [PUSH](#push)    
@@ -21,6 +25,9 @@
     - [DIRECT-ADDRESS-SEARCH](#direct-address-search)
     - [DIRECT-ADDRESS-INSERT](#direct-address-insert)
     - [DIRECT-ADDRESS-DELETE](#direct-address-delete)
+- [Binary search](#binary-search)
+    - [Iterative binary search](#iterative-binary-search)
+    - [Recursive binary search](#recursive-binary-search)
 - [Template for algorithms](#template-for-algortihms)
 
 # Sorting algorithms
@@ -66,6 +73,132 @@ INSERTION-SORT(A)
 
 ### Other info
 Insertion sort sorts in place. Space complexity is therefore $\Theta(1)$.
+
+## Merge
+### When to use
+When you need to merge subarrays in `MERGE-SORT`
+### Inputs/outputs
+- Input: `A` - array to be sorted, `p` - beginning point of subarray 1, `q` - last element of subarray 1, `r` - end of subarray 2 (start is `q` + 1)
+
+### Pseudocode/explanation
+#### Pseudocode
+```
+MERGE(A,p,q,r)
+ 1 n_1 = q - p + 1
+ 2 n_2 = r - q
+ 3 let L[1,n_1+1] and R[1,n_2+1]
+ 4 for i = 1 to n_1
+ 5    L[i] = A[p+i-1]
+ 6 for j = 1 to n_2
+ 7    R[j] = A[q+j]
+ 8 L[n_1+1] = ∞
+ 9 R[n_2+1] = ∞
+10 i = 1
+11 j = 1
+12 for k = p to r
+13    if L[i] <= R[j]
+14       A[k] = L[i]
+15       i = i + 1
+16    else A[k] = R[j]
+17       j = j + 1
+```
+#### Explanation
+- You first set $n_1$ to be the length of the subarray 1 and $n_2$ to be length of subarray 2
+- Set arrays `L` and `R` to be arrays of length $n_1+1$ and $n_2+1$
+- For loop from 1 to $n_1$/$n_2$ adds the element from correct position of `A` to `L` and `R`. `L` and `R` will be sorted.
+- Set $\infty$ to be last element of `L` and `R`.
+- Set variables `i` and `j` to be 1. These will be used to access elemenets in `L` and `R`.
+- For loop from `p` (startpoint for subarray 1) to `r` (endpoint of subarray 2)
+    - Checks if current element of `L`is smaller than or equal to current element of `R` (current element follows the index of what `i` or `j` is). If so, element at `A[k]` is set to be `L[i]` and 1 is added to `i`.
+    - If not, element at `A[k]` is set to be `R[j]` and 1 is added to `j`.
+- $\infty$ is added so all the elements of the other subarray will be chosen if one is empty already.
+
+### Runtime
+$\Theta(n)$
+
+## Merge-Sort
+### When to use
+When you need to sort an array (or list) of elements in ascending order. Merge sort is particularly useful for large datasets and offers good performance with its divide-and-conquer approach.
+### Input/output
+- Input: A - The array to be sorted, p - Starting index of the segment of A to be sorted, r - Ending index of the segment of A to be sorted.
+- Output: The array A sorted between indices p and r.
+### Pseudocode/explanation
+#### Pseudocode
+```
+MERGE-SORT(A,p,r)
+1 if p < r
+2   q = roundDown((q+r)/2)
+3   MERGE-SORT(A,p,q)
+4   MERGE-SORT(A,q+1,r)
+5   MERGE(A,p,q,r)
+```
+#### Explanation
+- Don't need to check if $p<r$. If $p<r$, subarray is 1 or smaller, which is always sorted
+- Find middlepoint (rounded down), to split subarray into two new subarrays
+- Run `MERGE-SORT` on both subarrays
+- Use `MERGE` on array
+
+### Runtime
+$O(n \log n)$ (merge sort algorithm divides the array into halves each time (which gives the $\log n$ part) and then merges n elements at each level of recursion (which contributes the $n$ part))
+
+### Other info
+- Has space complexity $\Theta(n)$, since it splits `A` into $n$ elements
+
+## Partition
+### When to use
+When implementing the quicksort algorithm, PARTITION is used to rearrange elements of an array around a pivot element.
+### Inputs/outputs
+- Input: A - An array, p - Starting index, r - Ending index.
+- Output: The partition index, after which elements are rearranged
+### Pseudocode/explanation
+#### Pseudocode
+```
+PARTITION(A, p, r)
+1 x = A[r]
+2 i = p - 1
+3 for j = p to r-1
+4    if A[j] <= x
+5       i = i + 1
+6       exchange A[i] with A[j]
+7 exchange A[i+1] with A[r]
+8 return i + 1
+
+```
+#### Explanation
+- `x` is set to be the last element that should be sorted of $A$
+- `i` is set to be 1 less than the first element that should be sorted of $A$
+- Runs through all elements of $A$, other than last element (pivot element)
+- If element at current position is smaller or equals to pivot element, `i` is set up by 1, and the element at current position is switched with element at `A[i]`
+- When all elements are iterated through, `A[i+1]` and `A[r]` is swapped
+- Pivot element is returned
+### Runtime
+$O(n)$ (more spesifically $O(r-p+1)$)
+
+## Quicksort
+### When to use
+Quicksort is a highly efficient, recursive, divide-and-conquer sorting algorithm. It's used when an average-case fast sorting algorithm is required.
+
+### Inputs/outputs
+- Input: A - An array, p - Starting index, r - Ending index.
+- Output: The array A, sorted between indices p and r.
+
+### Pseudocode/explanation
+#### Pseudocode
+```
+QUICKSORT(A, p, r)
+1 if p < r
+2    q = PARTITION(A, p, r)
+3    QUICKSORT(A, p, q-1)
+4    QUICKSORT(A, q+1, r)
+```
+#### Explanation
+- If `p < r` (if there is more than one element to be sorted), a pivot point `q` is found using `PARTITION`. 
+- `QUICKSORT` is then ran on left and right part of pivot point
+
+### Runtime
+- Average case: $O(n\log(n))$
+- Worst case: $O(n²)$
+
 
 # Stack functions
 
@@ -398,7 +531,67 @@ Searches for an element with key k in the linked list at the index determined by
 - Average case: $O(1)$
 - Worst case: $O(n)$
 
+# Binary search
+`
+## Iterative Binary Search
+### When to use
+When you need to find the position of a specific value (`v`) in a sorted array (`A`). This iterative version is straightforward and often preferred due to its simplicity and non-use of additional stack space.
 
+### Inputs/outputs
+- Input: `A` - A sorted array, `v` - The value to search for.
+- Output: The index of `v` in array `A` if found, `NIL` otherwise.
+
+### Pseudocode/explanation
+#### Pseudocode
+```
+BINARY-SEARCH(A, v):
+1 low = 1
+2 high = A.length
+3 while (low <= high)
+4 mid = roundDown((low + high) / 2)
+5 if (A[mid] == v)
+6 return mid
+7 else if (A[mid] < v)
+8 low = mid + 1
+9 else
+10 high = mid - 1
+11 return NIL
+```
+#### Explanation
+The function repeatedly divides the range of possible locations for `v` in half. If `v` is equal to the middle element (`A[mid]`), its position is returned. If `v` is larger, the search continues in the upper half. Otherwise, it continues in the lower half. The process repeats until `v` is found or the range is empty.
+
+### Runtime
+$O(\log n)$
+
+---
+
+## Recursive Binary Search
+### When to use
+When you need to perform a binary search and prefer a more elegant, though potentially less space-efficient, recursive approach.
+
+### Inputs/outputs
+- Input: `A` - A sorted array, `v` - The value to search for, `low` and `high` - The current search range within the array.
+- Output: The index of `v` in array `A` if found, `NIL` otherwise.
+
+### Pseudocode/explanation
+#### Pseudocode
+```
+BINARY-SEARCH(A, v, low, high)
+1 if (low <= high)
+2 mid = roundDown((low + high) / 2)
+3 if v == A[mid]
+4 return mid
+5 else if (A[mid] < v)
+6 BINARY-SEARCH(A, v, mid + 1, high)
+7 else
+8 BINARY-SEARCH(A, v, low, mid - 1)
+9 else return NIL
+```
+#### Explanation
+This recursive version of binary search operates similarly to the iterative version but calls itself recursively instead of using a loop. If `v` equals `A[mid]`, the index is returned. If `v` is greater, it recursively searches the upper half; if lesser, the lower half. The recursion stops when `v` is found or the range is empty.
+
+### Runtime
+$O(\log n)$
 
 
 
