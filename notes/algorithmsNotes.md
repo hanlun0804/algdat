@@ -250,6 +250,39 @@ RANDOMIZED-QUICKSORT(A, p, r)
 ### Other info
 Sorts in place
 
+## Counting sort
+### When to use
+When sorting an array of integers $A$ that are within a small range, specified by $k$. Counting sort is efficient for sorting integers that are not too spread out, as it sorts in linear time relative to the number of elements and the range of values.
+### Inputs/outputs
+- Input: $A$ - array to be sorted, $B$ - return array to store sorted elements, $k$ - upper bound for element in A$
+### Pseudocode/explanation
+#### Pseudocode
+```
+COUNTING-SORT(A, B, k)
+1 let C[0, k] be a new array
+2 for i = 0 to k
+3    C[i] = 0
+4 for j = 1 to A.length
+5    C[A[j]] = C[A[j]] + 1
+6 // C[i] now contains the number of elements equal to i
+7 for i = 1 to k
+8    C[i] = C[i] + C[i-1]
+9 // C[i] now contains the number of elements less to or equal to i
+10 for j = A.length downto 1
+11    B[C[A[j]]] = A[j]
+12    C[A[j]] = C[A[j]] - 1
+```
+#### Explanation
+- Line 1-3: Initializes an array C of size k+1 with all elements set to 0. This array will hold the count of each element in A.
+- Line 4-5: Counts each element in A and increments the corresponding index in C.
+Line 6-8: Modifies C such that each element at index i stores the number of elements less than or equal to i.
+- Line 10-12: Places each element of A in its correct sorted position in array B by referring to the counts in C, then decrements the count in C for each element placed.
+### Runtime
+$O(k + n)$
+### Other info
+- Is stable
+- Efficient for small set of integers
+
 # Stack functions
 
 ## STACK-EMPTY
