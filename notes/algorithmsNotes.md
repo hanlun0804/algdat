@@ -7,6 +7,8 @@
     - [Quicksort](#quicksort)
     - [Randomized partition](#randomized-partition)
     - [Randomized quicksort](#randomized-quicksort)
+    - [Counting sort](#counting-sort)
+    - [Radix sort](#radix-sort)
 - [Stack functions](#stack-functions)
     - [STACK-EMPTY](#stack-empty)    
     - [PUSH](#push)    
@@ -255,6 +257,7 @@ Sorts in place
 When sorting an array of integers $A$ that are within a small range, specified by $k$. Counting sort is efficient for sorting integers that are not too spread out, as it sorts in linear time relative to the number of elements and the range of values.
 ### Inputs/outputs
 - Input: $A$ - array to be sorted, $B$ - return array to store sorted elements, $k$ - upper bound for element in A$
+- Output: The sorted array B
 ### Pseudocode/explanation
 #### Pseudocode
 ```
@@ -282,6 +285,25 @@ $O(k + n)$
 ### Other info
 - Is stable
 - Efficient for small set of integers
+
+## Radix sort
+### When to use
+When you need to sort an array of numbers (or strings) where the elements have multiple digits or components (like dates or large numbers). Radix sort is particularly effective when the number of digits ($d$) is not large and is used for large datasets where each element has the same number of digits.
+### Inputs/outputs
+- Input: $A$ - array to be sorted, $d$ - number of digits in the largest number in $A$.
+- Output: The sorted array A.
+### Pseudocode/explanation
+#### Pseudocode
+```
+RADIX-SORT(A, d)
+1 for i = 1 to d
+2    use a stable sort to sort array A on digit i
+```
+#### Explanation
+RADIX-SORT sorts the array A by processing it digit by digit. It starts from the least significant digit (LSD) to the most significant digit (MSD). It goes through each digit and uses a stable sorting algorithm on them.
+### Runtime
+$\theta(d(n+k))$ if the stable sorting algorithm uses $\theta(n+k)$
+
 
 # Stack functions
 
