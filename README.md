@@ -14,7 +14,7 @@ I am also planning on having a seperate section for all algorithms in our curric
 |[29.11](notes/29notes.md)             |Posted      |Problems and algorithms|
 |[30.11](notes/30notes.md)             |Posted      |Datastructures         |
 |[01.12](notes/01notes.md)             |Posted      |Divide and conquer     |
-|[02.12](notes/02notes.md)             |Not reviewed|                       |
+|[02.12](notes/02notes.md)             |In progress |                       |
 |[03.12](notes/03notes.md)             |Not reviewed|                       |
 |[04.12](notes/04notes.md)             |Not reviewed|                       |
 |[05.12](notes/05notes.md)             |Not reviewed|                       |
