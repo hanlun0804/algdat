@@ -9,6 +9,7 @@
     - [Randomized quicksort](#randomized-quicksort)
     - [Counting sort](#counting-sort)
     - [Radix sort](#radix-sort)
+    - [Bucket sort](#bucket-sort)
 - [Stack functions](#stack-functions)
     - [STACK-EMPTY](#stack-empty)    
     - [PUSH](#push)    
@@ -32,6 +33,9 @@
 - [Binary search](#binary-search)
     - [Iterative binary search](#iterative-binary-search)
     - [Recursive binary search](#recursive-binary-search)
+- [Minimum and maximum](#minimum-and-maximum)
+    - [Minimum](#minimum)
+    - [Maximum](#maximum)
 - [Template for algorithms](#template-for-algortihms)
 
 # Sorting algorithms
@@ -303,6 +307,38 @@ RADIX-SORT(A, d)
 RADIX-SORT sorts the array A by processing it digit by digit. It starts from the least significant digit (LSD) to the most significant digit (MSD). It goes through each digit and uses a stable sorting algorithm on them.
 ### Runtime
 $\theta(d(n+k))$ if the stable sorting algorithm uses $\theta(n+k)$
+
+## Bucket sort
+### When to use
+When sorting an array $A$ of uniformly distributed floating-point numbers in the range $[0,1)$. Bucket Sort is effective when the input is uniformly distributed over the range because it distributes elements into a number of buckets and then sorts these buckets individually.
+### Inputs/outputs
+- Input: $A$ - An array of floating-point numbers in the range $[0,1)$.
+- Output: The sorted array $A$
+### Pseudocode/explanation
+#### Pseudocode
+```
+BUCKET-SORT(A)
+1 let B[0, n-1] be a new array
+2 n = A.length
+3 for i = 0 to n-1
+4    make B[i] an empty list
+5 for i = 1 to n
+6    insert A[i] into list B[roundDown(n*A[i])]
+7 for i = 0 to n-1
+8    sort list B[i] with insertion sort
+9 concatenate the lists B[0], B[1],...,B[n-1] together in order
+```
+#### Explanation
+- Line 1-4: Initialize an array B of n empty lists/buckets (n is the length of array A).
+
+- Line 5-6: Distribute each element in A into a bucket. This is done by calculating the index of the bucket (using roundDown(n*A[i])) for each element, where each bucket corresponds to a range in the array.
+
+- Line 7-8: Sort individual buckets. Each bucket is sorted using a stable sort, typically insertion sort, because individual buckets are expected to be small and insertion sort is efficient for small lists.
+
+- Line 9: Concatenate all buckets in order. This forms the sorted array as elements are grouped and sorted within the correct range in their respective buckets.
+### Runtime
+- Average case: $O(n + k)$
+- Worst case: $O(n^2)$
 
 
 # Stack functions
@@ -637,7 +673,6 @@ Searches for an element with key k in the linked list at the index determined by
 - Worst case: $O(n)$
 
 # Binary search
-`
 ## Iterative Binary Search
 ### When to use
 When you need to find the position of a specific value (`v`) in a sorted array (`A`). This iterative version is straightforward and often preferred due to its simplicity and non-use of additional stack space.
@@ -698,8 +733,33 @@ This recursive version of binary search operates similarly to the iterative vers
 ### Runtime
 $O(\log n)$
 
+# Minimum and maximum
+## Minimum
+### When to use
+When you need to find the smallest (minimum) element in an array A. This function is useful in scenarios where identifying the smallest element is required, such as in selection algorithms or when preprocessing data.
 
+### Inputs/outputs
+- Input: $A$ - An array of elements
+- Output: Smallest element in the  $A$
 
+### Pseudocode/explanation
+#### Pseudocode
+```
+MINIMUM(A)
+1 min = A[1]
+2 for i = 2 to A.length
+3    if min > A[i]
+4       min = A[i]
+5 return min
+```
+#### Explanation
+- Saves first element as current smallest
+- Iterates through the rest of the elements, and if min is bigger than the current element, it gets set as min
+### Runtime
+ $O(n)$
+
+## Maximum
+Very similar to [minimum](#minimum)
 
 
 
