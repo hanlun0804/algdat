@@ -36,6 +36,8 @@
 - [Minimum and maximum](#minimum-and-maximum)
     - [Minimum](#minimum)
     - [Maximum](#maximum)
+- [Find element function](#find-element-function)
+    - [Randomized select](#randomized-select)
 - [Template for algorithms](#template-for-algortihms)
 
 # Sorting algorithms
@@ -340,21 +342,6 @@ BUCKET-SORT(A)
 - Average case: $O(n + k)$
 - Worst case: $O(n^2)$
 
-## Randomized partition
-### When to use
-When you need to find the $i$ th smallest element in an array $A$. This function is useful in scenarios where you need to find order statistics (like the median, minimum, maximum, or any specific percentile) efficiently, especially in unsorted arrays.
-### Inputs/outputs
-- Input: $A$ - array of elements, $p$ - starting index of the $A$/subarray, r - ending index of the $A$/subarray, i - order statistic to find
-- Output: The $i$ th smallest element in the $A$.
-### Pseudocode/explanation
-#### Pseudocode
-
-
-#### Explanation
-
-
-### Runtime
-### Other info
 
 
 
@@ -778,6 +765,43 @@ MINIMUM(A)
 ## Maximum
 Very similar to [minimum](#minimum)
 
+# Find element function
+## Randomized select
+### When to use
+When you need to find the $i$ th smallest element in an array $A$. This function is useful in scenarios where you need to find order statistics (like the median, minimum, maximum, or any specific percentile) efficiently, especially in unsorted arrays.
+### Inputs/outputs
+- Input: $A$ - array of elements, $p$ - starting index of the $A$/subarray, r - ending index of the $A$/subarray, i - order statistic to find
+- Output: The $i$ th smallest element in the $A$.
+### Pseudocode/explanation
+#### Pseudocode
+```
+RANDOMIZED-SELECT(A, p, r, i)
+1 if p == r
+2    return A[p]
+3 q = RANDOMIZED-PARTITION(A, p, r)
+4 k = q - p + 1
+5 if i == k   // the pivot value is the answer
+6    return A[q]
+7 elseif i < k
+8    return RANDOMIZED-SELECT(A, p, q-1, i)
+9 else return RANDOMIZED-SELECT(A, q+1, r, i-k)
+```
+#### Explanation
+Line 1-2: If the current segment of the array has only one element (i.e., p == r), return that element; it's the only candidate for the i-th smallest.
+
+- Line 3: Partition the array using RANDOMIZED-PARTITION, which randomly selects a pivot and partitions the array around it. Elements less than the pivot are on its left, and greater elements are on its right.
+
+- Line 4: Calculate the position $k$ of the pivot element within the current segment of the array.
+
+- Line 5-6: If $i$ is equal to $k$, then the pivot element is the i-th smallest element, and the function returns it.
+
+- Line 7-8: If $i$ is less than $k$, recursively apply RANDOMIZED-SELECT to the left subarray (elements less than the pivot), as the $i$ th smallest element must be in this subarray.
+
+- Line 9: If $i$ is greater than $k$, recursively apply RANDOMIZED-SELECT to the right subarray (elements greater than the pivot), looking for the ($i$-$k$)-th smallest element in this subarray.
+
+### Runtime
+- Worst case: $O(n^2)$
+- Average case: $O(n)$
 
 
 
