@@ -268,30 +268,130 @@ MAX-HEAP-INSERT(A,key)
 - Fullstendig binærttre med $n$ noder har worst case kjøretid $\theta(\log(n))$, men tre med lineær kjede har $\theta(n)$
 
 ### 12.1 Hva er et binært tre?
-
+- Binært søketre er ordnet i binært tre som representers med lenket datastruktur med hver node som et objekt (hver node har $key$-verdi og attributter $left$ (mot barnenode), $right$ (mot barnenode) og $p$ (mot foreldrenode))
+- Binær-søketre egenskap: hvis $y$ er en node i venstre deltre til $x$ vil $y.key\leq x.key$, mens hvis $y$ er node i høyre deltre til $x$ vil $y.key>x.key$
+- Binær-søketre egenskap: om $y$ er node i $x$ sitt venstre deltre er $y.key\leq x.key$. Om $y$ er node i $x$ sitt høyre deltre er $y.key>x.key$
+- Binær-søketre egenskapen hjelper å skrive ut $key$-veridene i binært søketre i sortert rekkefølge via enkel rekursiv algoritme (ikke-ordnet tre traversering/inorder tree walk)
 
 ##### INORDER-TREE-WALK
+- Printer $key$ verdiene i sortert i binært søketre i sortert rekkefølge
+- Tar inn node $x$ og printer $key$-veridene til venstre deltre, til $x$ og til høyre deltre via rekursive kall
+- Kjøretid $\theta(n)$ ($\Omega(n)$ fordi den må innom alle noder, $O(n) kan bevises ved substitusjonsmetoden$)
+
+```
+INORDER-TREE-WALK(x)
+1 if x != NIL
+2    INORDER-TREE-WALK(x.left)
+3    print(x.key)
+4    INORDER-TREE-WALK(x.right)
+```
 
 
 ### 12.2 Operasjoner på binært søketre
-
+- Binært søketre støtter: MINIMUM, MAXIMUM, SEARCH, SUCCESSOR, PREDECESSOR - har kjøretid $O(h)$ hvor $h$ er høyde til treet
 
 ##### TREE-SEARCH
-
-
+- Tar inn peker mot rot og $key$ verdi $k$, returnerer peker mot node med $key=k$ om den eksisterer, ellers NIL. Begynner søket ved roten, returnerer noden om $x=NIL$ eller $x.key=k$ (roten har riktig verdi). Ellers sammenliknes $k$ og $x.key$, og fortsetter søket til venstre eller høyre, basert på om $k$ er større eller mindre enn $x.key$
+```
+TREE-SEARCH(x,k)
+1 if x == NIL or k == x.key
+2    return x
+3 if k < x.key
+4    return TREE-SEARCH(x.left,k)
+5 else return TREE-SEARCH(x.right,k)
+```
 ##### TREE-MINIMUM
-
-
+- Sjekker mot venstre helt til man kommer til en node som ikke har et element til venstre
+```
+TREE-MINIMUM(x)
+1 while x.left != NIL
+2    x = x.left
+3 return x
+```
 ##### TREE-MAXIMUM
+- Sjekker mot høyre helt til man kommer til en node som ikke har et element til høyre
 
-
+```
+TREE-MAXIMUM(x)
+1 while x.right != NIL
+2    x = x.right
+3 return x
+```
 ##### TREE-SUCCESSOR
-
-
+- Finner neste node i sortert rekkefølge
+- To scenarioer:
+    - Høyre subtre til $x$ er ikke tomt, så etterfølger er minste element i subtre
+    - Høyre subtre til $x$ er tomt, $x$ er største elementet i deltreet, så neste node vil være rota til $x.p$ eller $NIL$
+```
+TREE-SUCCESSOR(x)
+1 if x.right != NIL
+2    return TREE-MINIMUM(x.right)
+3 y = x-p
+4 while y != NIL and x == y.right
+5    x = y
+6    y = y.p
+7 return y
+```
 ### 12.3 Innsetting og fjerning
-
+- Fører til at binært søketre endres, fordi datastrukturen må modifiseres så binær-søketre egenskapen fortsatt gjelder
 
 ##### TREE-INSERT
+- Tar inn binært søketre $T$ og node $z$ som skal settes ved rett plass i $T$ basert på $z.key$
+- Begynner ved treets rot og bruker while-loop for å finne NIL som kan erstattes med $z$
+    - I hver iterasjon settes $y$ lik $x$, så den representerer forrige node. Om $z.key$ er mindre enn $x.key$ går den til venstre, ellers til høyre. Fortsetter til $x=NIL$, så $y$ er en node uten barnenoder. Lar så $y$ være foreldrenode til $z$
+    - Om treet er tomt settes roten lik $z$, ellers avgjøres det om $z$ er venstre eller høyre barn til $y$
+- Kjøretid: $O(h)$
+```
+TREE-INSERT(T,z)
+ 1 y = NIL
+ 2 x = T.root
+ 3 while x != NIL
+ 4    y = x
+ 5    if z.key < x.key
+ 6       x = x.left
+ 7    else x = x.right
+ 8 z.p = y
+ 9 if y == NIL
+10    T.root = z   // tree T was empty
+11 elseif z.key < y.key
+12    y.left = z
+13 else y.right = z
+```
+```
+TRANSPLANT(T,u,v)
+1 if u.p == NIL
+2    T.root = v
+3 elseif u == u.p.left
+4    u.p.left = v
+5 else u.p.right = v
+6 if v != NIL
+7    v.p = u.p
+```
+- Om du fjerner $z$ fra binært søketre må man oppdatere barnenoderpekere til $z.p$ og foreledrenodepekerne til $z.left$ og $z.right$ om $z$ har barnenoder
+- Bruker algoritmen TRANSPLANT for å flytte hele deltrær. Erstatter deltreet med rot $u$ med deltre med rot $v$
 
+```
+TREE-DELETE(T,z)
+ 1 if z.left == NIL
+ 2    TRANSPLANT(T,z,z.right)
+ 3 elseif z.right == NIL
+ 4    TRANSPLANT(T,z,z.left)
+ 5 else y = TREE-MINIMUM(z.right)
+ 6    if y.p != z
+ 7       TRANSPLANT(T,y,y.right)
+ 8       y.right = z.right
+ 9       y.right.p = y
+10    TRANSPLANT(T,z,y)
+11    y.left = z.left
+12    y.left.p = y
+```
+
+![Alt text](image-13.png)
 
 ### 12.4 Tilfeldig bygde binære søketrær - forelesning
+- Operasjoner i binære søketrær avhenger av høyde på treet, som kan variere
+- Average høyde er ikke kjent når innsetting og sletting brukes for å lage tre
+- Om man kun ser på innsetting er forventet høyde til tilfeldig bygd binært søketre $\O(\log(n))$, så worst-case høyden er lineær. Kjøretid til operasjoner er derfor $O(\log(n))$, som bryter sorteringshastigheten
+- Tilfeldig bygd betyr at $key$-verdier er satt inn i tilfeldig rekkefølge i initielt tom tre
+- Bruker ofte heap istedetfor binær søketrær fordi heap er perfekt balansert og operasjonene er $O(n\log(n))$, mens binært søketre er avhengig av balansering, innsetting og sletting, som ofte tar lenger tid
+- Heap brukes for min og maks, binær søketrær er bedre for å være sortert
