@@ -268,15 +268,15 @@ When sorting an array of integers $A$ that are within a small range, specified b
 #### Pseudocode
 ```
 COUNTING-SORT(A, B, k)
-1 let C[0, k] be a new array
-2 for i = 0 to k
-3    C[i] = 0
-4 for j = 1 to A.length
-5    C[A[j]] = C[A[j]] + 1
-6 // C[i] now contains the number of elements equal to i
-7 for i = 1 to k
-8    C[i] = C[i] + C[i-1]
-9 // C[i] now contains the number of elements less to or equal to i
+ 1 let C[0, k] be a new array
+ 2 for i = 0 to k
+ 3    C[i] = 0
+ 4 for j = 1 to A.length
+ 5    C[A[j]] = C[A[j]] + 1
+ 6 // C[i] now contains the number of elements equal to i
+ 7 for i = 1 to k
+ 8    C[i] = C[i] + C[i-1]
+ 9 // C[i] now contains the number of elements less to or equal to i
 10 for j = A.length downto 1
 11    B[C[A[j]]] = A[j]
 12    C[A[j]] = C[A[j]] - 1
@@ -803,7 +803,35 @@ Line 1-2: If the current segment of the array has only one element (i.e., p == r
 - Worst case: $O(n^2)$
 - Average case: $O(n)$
 
+# Heap
+```
+PARENT(i)
+1 return roundDown(i/2)
+```
 
+```
+LEFT(i)
+1 return 2i
+```
+
+```
+RIGHT(i)
+1 return 2i+1
+```
+
+```
+MAX-HEAPIFY(A,i)
+ 1 l = LEFT(i)
+ 2 r = RIGHT(i)
+ 3 if l <= A.heap-size and A[l] > A[i]
+ 4    largest = l  
+ 5 else largest = i
+ 6 if r <= A.heapsize and A[r] > A[largest]
+ 7    largest = r
+ 8 if largest != i 
+ 9    exchange A[i] with A[largest]
+10    MAX-HEAPIFY(A, largest)
+```
 
 
 

@@ -1,14 +1,14 @@
 # Innhold
 - [Forelesning 4 - Rangering i lineær tid](#forelesning-4---rangering-i-lineær-tid)
-- [Kapittel 8 - Sortering i lineær tid](#kapittel-8---sortering-i-lineær-tid)
-    - [8.1 Nedre grense for sortering](#81-nedre-grense-for-sortering)
-    - [8.2 Tellesortering](#82-tellesortering)
-    - [8.3 Radikssortering](#83-radikssortering)
-    - [8.4 Bøttesortering](#84-bøttesortering)
-- [Kapittel 9 - Medianer og orden statistikk](#kapittel-9---medianer-og-orden-statistikk)
-    - [9.1 Minimum og maksimum](#91-minimum-og-maksimum)
-    - [9.2 Seleksjon i forventet lineær tid](#92-seleksjon-i-forventet-lineær-tid)
-    - [9.3 Seleksjon med worst-case lineær kjøretid](#93-seleksjon-med-worst-case-lineær-kjøretid)
+    - [Kapittel 8 - Sortering i lineær tid](#kapittel-8---sortering-i-lineær-tid)
+        - [8.1 Nedre grense for sortering](#81-nedre-grense-for-sortering)
+        - [8.2 Tellesortering](#82-tellesortering)
+        - [8.3 Radikssortering](#83-radikssortering)
+        - [8.4 Bøttesortering](#84-bøttesortering)
+    - [Kapittel 9 - Medianer og orden statistikk](#kapittel-9---medianer-og-orden-statistikk)
+        - [9.1 Minimum og maksimum](#91-minimum-og-maksimum)
+        - [9.2 Seleksjon i forventet lineær tid](#92-seleksjon-i-forventet-lineær-tid)
+        - [9.3 Seleksjon med worst-case lineær kjøretid](#93-seleksjon-med-worst-case-lineær-kjøretid)
 
 # Forelesning 4 - Rangering i lineær tid
 - Læringsmål:
