@@ -340,6 +340,23 @@ BUCKET-SORT(A)
 - Average case: $O(n + k)$
 - Worst case: $O(n^2)$
 
+## Randomized partition
+### When to use
+When you need to find the $i$ th smallest element in an array $A$. This function is useful in scenarios where you need to find order statistics (like the median, minimum, maximum, or any specific percentile) efficiently, especially in unsorted arrays.
+### Inputs/outputs
+- Input: $A$ - array of elements, $p$ - starting index of the $A$/subarray, r - ending index of the $A$/subarray, i - order statistic to find
+- Output: The $i$ th smallest element in the $A$.
+### Pseudocode/explanation
+#### Pseudocode
+
+
+#### Explanation
+
+
+### Runtime
+### Other info
+
+
 
 # Stack functions
 
