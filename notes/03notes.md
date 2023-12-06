@@ -391,7 +391,7 @@ TREE-DELETE(T,z)
 ### 12.4 Tilfeldig bygde binære søketrær - forelesning
 - Operasjoner i binære søketrær avhenger av høyde på treet, som kan variere
 - Average høyde er ikke kjent når innsetting og sletting brukes for å lage tre
-- Om man kun ser på innsetting er forventet høyde til tilfeldig bygd binært søketre $\O(\log(n))$, så worst-case høyden er lineær. Kjøretid til operasjoner er derfor $O(\log(n))$, som bryter sorteringshastigheten
+- Om man kun ser på innsetting er forventet høyde til tilfeldig bygd binært søketre $O(\log(n))$, så worst-case høyden er lineær. Kjøretid til operasjoner er derfor $O(\log(n))$, som bryter sorteringshastigheten
 - Tilfeldig bygd betyr at $key$-verdier er satt inn i tilfeldig rekkefølge i initielt tom tre
 - Bruker ofte heap istedetfor binær søketrær fordi heap er perfekt balansert og operasjonene er $O(n\log(n))$, mens binært søketre er avhengig av balansering, innsetting og sletting, som ofte tar lenger tid
 - Heap brukes for min og maks, binær søketrær er bedre for å være sortert

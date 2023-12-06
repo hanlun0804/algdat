@@ -137,7 +137,7 @@ When you need to sort an array (or list) of elements in ascending order. Merge s
 ```
 MERGE-SORT(A,p,r)
 1 if p < r
-2   q = roundDown((q+r)/2)
+2   q = roundDown((p+r)/2)
 3   MERGE-SORT(A,p,q)
 4   MERGE-SORT(A,q+1,r)
 5   MERGE(A,p,q,r)
@@ -477,7 +477,7 @@ LIST-SEARCH(L,k)
 `L.head` is saved in `x`. Checks that `x` isn't NIL (end of list) or that `x.key` isn't `k` (then we found `k`). Returns `x`. 
 
 ### Runtime
-$O(1)$
+$O(n)$
 
 
 
@@ -779,7 +779,7 @@ RANDOMIZED-SELECT(A, p, r, i)
 1 if p == r
 2    return A[p]
 3 q = RANDOMIZED-PARTITION(A, p, r)
-4 k = q - p + 1
+4 k = q - p + 1 
 5 if i == k   // the pivot value is the answer
 6    return A[q]
 7 elseif i < k
@@ -804,21 +804,56 @@ Line 1-2: If the current segment of the array has only one element (i.e., p == r
 - Average case: $O(n)$
 
 # Heap
+
+## Parent
+### When to use
+Use to find parent node in heap or tree
+
+### Inputs/outputs
+- Input: i - index of a node in the heap or tree
+- Output: index of the parent node.
+### Pseudocode/explanation
+#### Pseudocode
 ```
 PARENT(i)
 1 return roundDown(i/2)
 ```
+#### Explanation
+- Function calculates of index of parent of node located at $i$ by returning $i/2$ rounded down
+### Runtime
+$O(1)$
 
+
+## Name
+### When to use
+### Inputs/outputs
+### Pseudocode/explanation
+### Runtime
+### Other info
 ```
 LEFT(i)
 1 return 2i
 ```
 
+
+## Name
+### When to use
+### Inputs/outputs
+### Pseudocode/explanation
+### Runtime
+### Other info
 ```
 RIGHT(i)
 1 return 2i+1
 ```
 
+
+## Name
+### When to use
+### Inputs/outputs
+### Pseudocode/explanation
+### Runtime
+### Other info
 ```
 MAX-HEAPIFY(A,i)
  1 l = LEFT(i)
@@ -833,6 +868,238 @@ MAX-HEAPIFY(A,i)
 10    MAX-HEAPIFY(A, largest)
 ```
 
+
+## Name
+### When to use
+### Inputs/outputs
+### Pseudocode/explanation
+### Runtime
+### Other info
+```
+BUILD-MAX-HEAP(A)
+1 A.heap-size = A.length
+2 for i = roundDown(A.length/2) downto 1
+3    MAX-HEAPIFY(A,i)
+```
+
+
+## Name
+### When to use
+### Inputs/outputs
+### Pseudocode/explanation
+### Runtime
+### Other info
+```
+HEAPSORT(A)
+1 BUILD-MAX-HEAP(A)
+2 for i = A.length downto 2
+3    exchange A[1] with a[i]
+4    A.heap-size = A.heap-size - 1
+5    MAX-HEAPIFY(A,1)
+```
+
+
+## Name
+### When to use
+### Inputs/outputs
+### Pseudocode/explanation
+### Runtime
+### Other info
+```
+HEAP-MAXIMUM(A)
+1 return A[1]
+```
+
+
+## Name
+### When to use
+### Inputs/outputs
+### Pseudocode/explanation
+### Runtime
+### Other info
+```
+HEAP-EXTRACT-MAX(A)
+1 if A.heap-size < 1
+2    error "heap-underflow"
+3 max = A[1]
+4 A[1] = A[A.heap-size]
+5 A.heap-size = A.heap-size - 1
+6 MAX-HEAPIFY(A,1)
+7 return max
+```
+
+
+## Name
+### When to use
+### Inputs/outputs
+### Pseudocode/explanation
+### Runtime
+### Other info
+```
+HEAP-INCREASE-KEY(A,i,key)
+1 if key < A[i]
+2    error "new key is smaller than current key"
+3 A[i] = key
+4 while i > 1 and A[PARENT(i)] < A[i]
+5    exchange A[i] with A[PARENT(i)]
+6    i = PARENT(i)
+```
+
+
+## Name
+### When to use
+### Inputs/outputs
+### Pseudocode/explanation
+### Runtime
+### Other info
+```
+MAX-HEAP-INSERT(A,key)
+1 A.heap-size = A.heap-size + 1
+2 A[A.heap-size] = -∞
+3 HEAP-INCREASE-KEY(A,A.heap-size,key)
+```
+
+
+## Name
+### When to use
+### Inputs/outputs
+### Pseudocode/explanation
+### Runtime
+### Other info
+```
+INORDER-TREE-WALK(x)
+1 if x != NIL
+2    INORDER-TREE-WALK(x.left)
+3    print(x.key)
+4    INORDER-TREE-WALK(x.right)
+```
+
+
+## Name
+### When to use
+### Inputs/outputs
+### Pseudocode/explanation
+### Runtime
+### Other info
+```
+TREE-SEARCH(x,k)
+1 if x == NIL or k == x.key
+2    return x
+3 if k < x.key
+4    return TREE-SEARCH(x.left,k)
+5 else return TREE-SEARCH(x.right,k)
+```
+
+
+## Name
+### When to use
+### Inputs/outputs
+### Pseudocode/explanation
+### Runtime
+### Other info
+```
+TREE-MINIMUM(x)
+1 while x.left != NIL
+2    x = x.left
+3 return x
+```
+
+
+## Name
+### When to use
+### Inputs/outputs
+### Pseudocode/explanation
+### Runtime
+### Other info
+```
+TREE-MAXIMUM(x)
+1 while x.right != NIL
+2    x = x.right
+3 return x
+```
+
+
+## Name
+### When to use
+### Inputs/outputs
+### Pseudocode/explanation
+### Runtime
+### Other info
+```
+TREE-SUCCESSOR(x)
+1 if x.right != NIL
+2    return TREE-MINIMUM(x.right)
+3 y = x-p
+4 while y != NIL and x == y.right
+5    x = y
+6    y = y.p
+7 return y
+```
+
+
+## Name
+### When to use
+### Inputs/outputs
+### Pseudocode/explanation
+### Runtime
+### Other info
+```
+TREE-INSERT(T,z)
+ 1 y = NIL
+ 2 x = T.root
+ 3 while x != NIL
+ 4    y = x
+ 5    if z.key < x.key
+ 6       x = x.left
+ 7    else x = x.right
+ 8 z.p = y
+ 9 if y == NIL
+10    T.root = z   // tree T was empty
+11 elseif z.key < y.key
+12    y.left = z
+13 else y.right = z
+```
+
+
+## Name
+### When to use
+### Inputs/outputs
+### Pseudocode/explanation
+### Runtime
+### Other info
+```
+TRANSPLANT(T,u,v)
+1 if u.p == NIL
+2    T.root = v
+3 elseif u == u.p.left
+4    u.p.left = v
+5 else u.p.right = v
+6 if v != NIL
+7    v.p = u.p
+```
+
+
+## Name
+### When to use
+### Inputs/outputs
+### Pseudocode/explanation
+### Runtime
+### Other info
+```
+TREE-DELETE(T,z)
+ 1 if z.left == NIL
+ 2    TRANSPLANT(T,z,z.right)
+ 3 elseif z.right == NIL
+ 4    TRANSPLANT(T,z,z.left)
+ 5 else y = TREE-MINIMUM(z.right)
+ 6    if y.p != z
+ 7       TRANSPLANT(T,y,y.right)
+ 8       y.right = z.right
+ 9       y.right.p = y
+10    TRANSPLANT(T,z,y)
+11    y.left = z.left
+12    y.left.p = y
+```
 
 
 
