@@ -313,9 +313,9 @@ For to funksjoner $f(n)$ og $g(n)$ har vi at $f(n)=\Theta(g(n))$ hvis og bare hv
 - Instans: bestemt input
 - Problemstørrelse ($n$): lagringsplass som trengs for en instans
 
-<img src="assets/oOmegaTheta.png" alt="Theta explained" height="200px"></img>
+<img src="assets/assets01/oOmegaTheta.png" alt="Theta explained" height="200px"></img>
 
-<img src="assets/asymptoticNotationSymbols.png" alt="Theta explained" height="200px"></img>
+<img src="assets/assets01/asymptoticNotationSymbols.png" alt="Theta explained" height="200px"></img>
 
 ### Kjøretid
 
