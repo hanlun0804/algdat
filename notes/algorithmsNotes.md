@@ -1101,6 +1101,97 @@ TREE-DELETE(T,z)
 12    y.left.p = y
 ```
 
+```
+CUT-ROD(p,n)
+1 if n == 0
+2    return 0
+3 q = -∞
+4 for i = 1 to n
+5    q = max(q,p[i]+CUT-ROD(p,n-i))
+6 return q
+```
+
+```
+MEMOIZED-CUT-ROD(p,n)
+1 let r[0,n] be new array
+2 for i = 0 to n
+3    r[i] = -∞
+4 return MEMOIZED-CUT-ROD-AUX(p,n,r)
+```
+
+```
+MEMOIZED-CUT-ROD-AUX(p,n,r)
+1 if r[n] >= 0
+2    return r[n]
+3 if n == 0
+4    q = 0
+5 else q = -∞
+6    for i = 1 to n
+7       q = max(q,p[i]+MEMOIZED-CUT-ROD-AUX(p,n-i,r))
+8 r[n] = q
+9 return q
+```
+
+```
+EXTENDED-BOTTOM-UP-CUT-ROD(p,n)
+ 1 let r[0,n] and s[0,n] be new arrays
+ 2 r[0] = 0
+ 3 for j = 1 to n
+ 4    q = -∞
+ 5    for i = 1 to j
+ 6       if q < p[i] + r[j-1]
+ 7          q = p[i] + r[j-i]
+ 8          s[j] = i
+ 9    r[j] = q
+10 return r and s 
+```
+
+```
+LCS-LENGTH(X,Y)
+ 1 m = X.length
+ 2 n = Y.length
+ 3 let b[1..m,1..n] and c[0..m,0..n] be new talbes
+ 4 for i = 1 to m
+ 5    c[i,0] = 0
+ 6 for i = 1 to m
+ 7    c[0,i] = 0
+ 8 for i = 1 to m
+ 9    for j = 1 to n
+10       if x_i == y_j
+11          c[i,j] = c[i-1,j-1] + 1
+12          b[i,j] = "↖"
+13       elseif c[i-1,j] >= c[i,j-1]
+14          c[i,j] = c[i-1,j] 
+15          b[i,j] = "↑"
+16       else c[i,j] = c[i-1,j-1] + 1
+17          b[i,j] = "←"
+18 
+```
+
+```
+KNAPSACK(n,W)
+1 if n == 0
+2    return 0
+3 x = KNAPSACK(n-1,W)
+4 if W < w_n
+5    return x 
+6 else y = KNAPSACK(n-1,W-w_n) + v_n
+7    return max(x,y)
+```
+
+```
+KNAPSACK(n,W)
+ 1 let K[0..n,0..W] be new array
+ 2 for j = 0 to W
+ 3    K[0,j] = 0
+ 4 for i = 1 to n
+ 5    for j = 0 to W
+ 6       x = K[i-1,j]
+ 7       if j < w_i
+ 8          K[i,j] = x
+ 9       else y = K[i-1,j-w_i] + v_i
+10          K[i,j] = max(x,y)
+```
 
 
 

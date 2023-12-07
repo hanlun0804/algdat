@@ -3,6 +3,7 @@
     - [Kapittel 15 - Dynamisk programmering](#kapittel-15---dynamisk-programmering)
         - [15.1 Stavkutting - eksempel på dynamisk programmering](#151-stavkutting---eksempel-på-dynamisk-programmering)
         - [15.3 Elementer ved dynamisk programmering](#153-elementer-ved-dynamisk-programmering)
+        -[15.5 Longest Common Subsequence (LCS)](#155-longest-common-subsequence-lcs)
 # Forelesning 6 - Dynamisk programmering
 - Dynamisk programmering er måte å genarelisere splitt og hersk prosedyrer hvor delproblemer overlapper. Finner og lagrer del-løsninger, så vi slipper å løse dem fler ganger.
 - Læringsmål:
@@ -189,3 +190,136 @@ EXTENDED-BOTTOM-UP-CUT-ROD(p,n)
 - Memoisert rekursiv algoritme har array som lagrer løsningene til hvert delproblem
 - Om algoritmen møtes samme delproblem senere søker den opp løsning. Verdier initialiseres som $\pm\infty$
 - Om alle delproblem må løses en gang er ofte bottom-up bedre enn top town. Om ikke alle delproblem må løses er ofte top-down memoisering bedre enn bottom up.
+
+### 15.5 Longest Common Subsequence (LCS)
+- DNA kan representeres som streng hvor hver base gis av forbokstav: $\{\text{A,G,C,T}\}$
+- DNA 1: $S_1=ACCGAAA$, DNA 2: $S_2=ATCCTAG$
+- Måte å finne likhet mellom DNA er å lage $S_3=ACCG$, som er likhet mellom $S_1$ og $S_2$. Jo lenger $S_3$ er, jo likere er $S_1$ og $S_2$. De like elementene trenger ikke være på samme plass eller etter hverandre, men index må være lik.
+
+#### Steg 1 - karakteriserer strukturen til LCS
+- LCS har optimal delstruktur (hvis siste elementer i $X$ og $Y$ er like, er elementet inkludert i LCS)
+- Kan fjerne siste elementet fra $X$ og $Y$ og finne LCS for gjenværende sekvenser, $X_{m-1}$ og $Y_{n-1}$
+- Om de siste elementene er ulike, inneholder ikke LCS begge, og må finne største LCS ved å fjerne siste element fra $X$ eller $Y$
+
+#### Steg 2 - En rekursiv løsning for lengden til LCS
+- Må enten undersøke et eller to delproblemer
+    - $x_m=y_n$: løser et delproblem, finne LCS til $X_{m-1}$ og $Y_{n-1}$, siden $x_m=y_n$ festes til LCS for å finne LCS til $X$ og $Y$
+    - $x_m\neq y_n$: løser to delproblem, finne LCS til $X_{m-1}$ og $Y$ og finne en LCS til $X$ og $Y_{n-1}$. Den lengste er LCS.
+    - Delproblemer overlapper. Finne LCS til $X_{m-1}$ og $Y$ og $X$ og $Y_{n-1} inkluderer deldelproblemer av å finne LCS til $X_{m-1}$ og $Y_{n-1}$
+    - Lar $c[i,j]$ være lengden til LCS av sekvensene $X_i$ og $Y_j$. Optimal delstruktur til LCS problemet gir rekursiv løsning:
+
+    $$
+    c[i,j] = \begin{cases} 
+    0 & \text{hvis } i = 0 \text{ eller } j = 0 \\
+    c[i-1, j-1] + 1 & \text{hvis } i,j > 0 \text{ og } x_i = y_j \\
+    \max(c[i,j-1], c[i-1,j]) & \text{hvis } i,j > 0 \text{ og } x_i \neq y_j 
+    \end{cases}
+    $$
+
+
+#### Steg 3 - regne ut lengden til LCS
+LCS problemet har kun $\theta(mn)$ distinkte delproblemer, kan bruke dynamisk programmering for å finne løsning
+
+##### LCS-LENGTH
+- Fremgangsmåte (uten pseudokode): 
+    - Tegn en matrise, $M$ på størrelse $X.length+1\cdot Y.length+1$. Den må ha plass til tall og pil. Denne er nullindexert.
+    - Fyll inn 0 i første kolonne og rad
+    - Skriv opp $X$ og $Y$ på siden
+    - Begynn på $X[1]$ og $Y[1]$. Om $X[1]=Y[1]$, sett $M[1,1]$ til å være $M[1-1, 1-1] + 1$, og ha pilen "↖". Ellers settes $M[1,1]$ til å være det største av $M[1-1,1]$ og $M[1,1-1]$, og sett pilen til å peke på den største. Om de er like store, sett "↑". 
+    - Gå videre med $X[1]$ og $Y[2]$, $Y[3]$, osv, til du har gått igjennom alle $Y[i]$ på $X[1]$. Gå deretter til $X[2]$, og repeter prosessen.
+- Pseudokode har kjøretid $\theta(mn)$
+- LCS vil ha rekkefølgen til alle "↖", startet fra nederst i høyre hjørne
+
+<img src="image-14.png" height="300px">
+
+```
+LCS-LENGTH(X,Y)
+ 1 m = X.length
+ 2 n = Y.length
+ 3 let b[1..m,1..n] and c[0..m,0..n] be new talbes
+ 4 for i = 1 to m
+ 5    c[i,0] = 0
+ 6 for i = 1 to m
+ 7    c[0,i] = 0
+ 8 for i = 1 to m
+ 9    for j = 1 to n
+10       if x_i == y_j
+11          c[i,j] = c[i-1,j-1] + 1
+12          b[i,j] = "↖"
+13       elseif c[i-1,j] >= c[i,j-1]
+14          c[i,j] = c[i-1,j] 
+15          b[i,j] = "↑"
+16       else c[i,j] = c[i-1,j-1] + 1
+17          b[i,j] = "←"
+18 
+```
+
+#### Steg 4 - rekonstruere en LCS
+- Tabell hjelper konstruere LCS for $X$ og $Y$ (finne elementene i LCS og ikke bare lengden til LCS)
+- LCS vil ha rekkefølgen til alle "↖", startet fra nederst i høyre hjørne
+
+## Appendix D - Ryggsekkproblemet
+- Har to versjoner av ryggsekkproblemet (knapsackproblem)
+- Tyv raner butikk og finner $n$ varer. $i$-ende vare er verdt $v_i$ kroner og veier $w_i$ gram. Tyv vil ha så mye verdi som mulig, men ryggsekk bærer kun $W$ gram.
+- Fraksjonell versjon: lett å løse, ser på kilopris. Tar så mye som mulig av dyreste gjenstand, og fortsetter ned lista til ryggsekk er full.
+- Binær versjon er vanskeligere: kan kun ta hel gjenstand eller la ligge  
+    - Også kalt 0-1 versjonen, hvor 0 er la ligge, 1 er ta med
+- Løsning av binær versjon:
+    - Dekomponering basert på ja-nei-spørsmål. "Skal vi ta med gjenstand $i$?"
+    - Samme om man svarer ja eller nei har man delproblem, som løses rekursivt
+    - Tenker vi er på siste trinn og har $1,2,...,i$ gjenstander tilgjengelig
+    - Har alternativene:
+        - Ja, ta med gjenstand $i$: løser deretter problemet for gjenstander $1,2,...,i-1$, hvor ryggsekkens kapasitet er redusert med $w_i$, og legger til $v_i$
+        - Nei, tar ikke med gjenstand $i$: løser problemet for gjenstander $1,2,...,i-1$ men har fortsatt hele kapasiteten, og legger ikke til $v_i$
+
+#### Rekursiv løsning av KNAPSACK
+##### KNAPSACK
+- Metoden tar inn største verdien tyv kan ta
+    - Om antall varer er 0, kan ikke tyv ta noe
+    - Lar ellers x være maksimal verdi fra andre varer, ved å ikke velge $n$
+    - Om vekt av $n$ er større enn vekt til ryggsekk, velger vi $x$
+    - Lar $y$ være maksimal vekt av andre varer ved å velge vare $n$
+    - Returnerer max av $x$ og $y$
+    - Kjøretid er eksponentiell, da antall rekursive kall vokser ekspnentielt siden det er to valg per kall
+```
+KNAPSACK(n,W)
+1 if n == 0
+2    return 0
+3 x = KNAPSACK(n-1,W)
+4 if W < w_n
+5    return x 
+6 else y = KNAPSACK(n-1,W-w_n) + v_n
+7    return max(x,y)
+```
+
+#### Oppgave 6.2-3 Dynamisk programmering av KNAPSACK
+- Bruker dynamisk programmering for å redusere kjøretiden. Kan bruke memoisering eller iterativ bottom-up løsning
+
+##### KNAPSACK'
+- Bottom up løsning på ryggsekkproblemet
+- Metoden returnerer den største verien tyven kan ta, og lagrer delløsninger i tabell $K$
+    - $K[i,j]$ gir maksimal verdi som kan oppnås for varene $1,2,...,j$ ved kapasitet $j$
+- Begynner med å bestemme $0$-verdiene, siden det er bottom-up
+    - For hver kapasitet settes verdien lik $0$ når det er ingen objekter
+- Løser deretter delproblemene fra bunn og opp
+    - Dobbel for-løkkegår gjennom alle varer og kapasiteter fra bunnen
+    - $x$ settes lik total verdi om $i$ ikke velges
+    - Om vekten til $i$ er større enn kapasiteten, settes $K[i,j]$ settes lik $x$ fordi det ikke er kapasitet itl å velge vare $i$. Ellers settes $y$ lik total verdi når $i$ velges, og $K[i,j]$ settes til max av $x$ og $y$
+
+```
+KNAPSACK(n,W)
+ 1 let K[0..n,0..W] be new array
+ 2 for j = 0 to W
+ 3    K[0,j] = 0
+ 4 for i = 1 to n
+ 5    for j = 0 to W
+ 6       x = K[i-1,j]
+ 7       if j < w_i
+ 8          K[i,j] = x
+ 9       else y = K[i-1,j-w_i] + v_i
+10          K[i,j] = max(x,y)
+```
+
+#### Men, dette er ikke polynomisk
+- Er NP-hardt problem
+- $T(n,m)=\theta(n2^m)$

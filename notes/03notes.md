@@ -188,7 +188,7 @@ HEAPSORT(A)
 ```
 
 ### 6.5 Prioritetskøer
-- God inplementasjon av quicksort er ofte bedre enn heapsort
+- God implementasjon av quicksort er ofte bedre enn heapsort
 - Heapsort brukes ofte for å lage effektive prioritetskøer
     - Prioritetskø er datastruktur som inneholder sett $S$ med elementer assosiert med verdi $key$, som linked-list og dynamiske tabeller
     - Max-prioritetskø er basert på max-heap
