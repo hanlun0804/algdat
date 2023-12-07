@@ -18,8 +18,8 @@ I learned a lot about the sorting algorithm from trying to sort cards according 
 |[30.11](notes/30notes.md)             |Posted      |Datastructures         |
 |[01.12](notes/01notes.md)             |Posted      |Divide and conquer     |
 |[02.12](notes/02notes.md)             |Posted      |Sorting in linear time |
-|[03.12](notes/03notes.md)             |In progress |                       |
-|[04.12](notes/04notes.md)             |Not reviewed|                       |
+|[03.12](notes/03notes.md)             |Posted      |Rooted tree structures |
+|[04.12](notes/04notes.md)             |Posted      |Dynamic programming    |
 |[05.12](notes/05notes.md)             |Not reviewed|                       |
 |[06.12](notes/06notes.md)             |Not reviewed|                       |
 |[07.12](notes/07notes.md)             |Not reviewed|                       |
