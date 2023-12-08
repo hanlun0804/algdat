@@ -10,23 +10,23 @@ I am also planning on having a seperate section for all algorithms in our curric
 I learned a lot about the sorting algorithm from trying to sort cards according to the pseudocode. Highly recommend!
 
 ## Notes
-|Notes                                 |Status      |Topic                  |
-|--------------------------------------|------------|-----------------------|
-|[Algorithms](notes/algorithmsNotes.md)|In progress |Algorithms             |
-|[Good to know](notes/gtkNotes.md)     |In progress |Good to know for exam  |    
-|[29.11](notes/29notes.md)             |Posted      |Problems and algorithms|
-|[30.11](notes/30notes.md)             |Posted      |Datastructures         |
-|[01.12](notes/01notes.md)             |Posted      |Divide and conquer     |
-|[02.12](notes/02notes.md)             |Posted      |Sorting in linear time |
-|[03.12](notes/03notes.md)             |Posted      |Rooted tree structures |
-|[04.12](notes/04notes.md)             |Posted      |Dynamic programming    |
-|[05.12](notes/05notes.md)             |Posted      |Greedy algorithms      |
-|[06.12](notes/06notes.md)             |Posted      |Traversing graphs      |
-|[07.12](notes/07notes.md)             |In progress |Minimal trees          |
-|[08.12](notes/08notes.md)             |Not reviewed|                       |
-|[09.12](notes/09notes.md)             |Not reviewed|                       |
-|[10.12](notes/10notes.md)             |Not reviewed|                       |
-|[11.12](notes/11notes.md)             |Not reviewed|                       |
+|Notes                                 |Status      |Topic                               |
+|--------------------------------------|------------|------------------------------------|
+|[Algorithms](notes/algorithmsNotes.md)|In progress |Algorithms                          |
+|[Good to know](notes/gtkNotes.md)     |In progress |Good to know for exam               |    
+|[29.11](notes/29notes.md)             |Posted      |Problems and algorithms             |
+|[30.11](notes/30notes.md)             |Posted      |Datastructures                      |
+|[01.12](notes/01notes.md)             |Posted      |Divide and conquer                  |
+|[02.12](notes/02notes.md)             |Posted      |Sorting in linear time              |
+|[03.12](notes/03notes.md)             |Posted      |Rooted tree structures              |
+|[04.12](notes/04notes.md)             |Posted      |Dynamic programming                 |
+|[05.12](notes/05notes.md)             |Posted      |Greedy algorithms                   |
+|[06.12](notes/06notes.md)             |Posted      |Traversing graphs                   |
+|[07.12](notes/07notes.md)             |Posted      |Minimal trees                       |
+|[08.12](notes/08notes.md)             |In progress |Shortest path from one to every node|
+|[09.12](notes/09notes.md)             |Not reviewed|                                    |
+|[10.12](notes/10notes.md)             |Not reviewed|                                    |
+|[11.12](notes/11notes.md)             |Not reviewed|                                    |
 
 ## Shoutouts
 Here I will post the people who has particularly helped me, and links to their work if applicable and/or if I get their permission to.
