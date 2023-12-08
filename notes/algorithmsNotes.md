@@ -1193,6 +1193,94 @@ KNAPSACK(n,W)
 10          K[i,j] = max(x,y)
 ```
 
+```
+REC-ACT-SEL(s,f,k,n)
+1 m = k+1
+2 while m <= n and s[m] < f[k]
+3    m = m+1
+4 if m <= n
+5    S = REC-ACT-SEL(s,f,m,n)
+6    return {a_m} U S
+7 else return Ø
+```
+
+```
+GREEDY-ACTIVITY-SELECTOR(s,f)
+1 n = s.length
+2 A = {a_1}
+3 k = 1
+4 for m = 2 to n
+5    if s[m] >= f[k]
+6       A = A U {a_m}
+7       k = m
+8 return A
+```
+
+```
+HUFFMAN(C)
+1 n = |C|
+2 Q = C
+3 for i = 1 to n-1
+4    allocate a new node z
+5    z.left = x = EXTRACT-MIN(Q)
+6    z.right = y = EXTRACT-MIN(Q)
+7    z.freq = x.freq + y.freq
+8    INSERT(Q,z)
+9 return EXTRACT-MIN(Q)   // return the root of the tree
+```
+```
+BFS(G,s)
+ 1 for each vertex u in G.V - {s}
+ 2    u.color = WHITE
+ 3    u.d = ∞
+ 4    u.pi = NIL
+ 5 s.color = GRAY
+ 6 s.d = 0
+ 7 s.pi = NIL
+ 8 Q = Ø
+ 9 ENQUEUE(Q,s)
+10 while Q != Ø
+11    u = DEQUEUE(Q)
+12    for each v in G.Adj[u]
+13       if v.color == WHITE
+14          v.color = GRAY
+15          v.d = u.d + 1       
+16          v.pi = u
+17          ENQUEUE(Q,v)
+18    u.color = BLACK
+```
+
+```
+DFS(G)
+1 for each vertex u in G.V
+2    u.color = WHITE
+3    u.pi = NIL
+4 time = 0 
+5 for each vertex u \in G.V
+6    if u.color == WHITE
+7       DFS-VISIT(G,i)
+```
+
+```
+DFS-VISIT(G,u)
+ 1 time = time + 1
+ 2 u.d = time
+ 3 u.color = GRAY
+ 4 for each v in G.Adj[u]
+ 5    if v.color == WHITE
+ 6       v.pi = u
+ 7       DFS-VISIT(G,v)
+ 8 u.color = BLACK
+ 9 time = time + 1
+10 u.f = time
+```
+
+```
+TOPOLOGICAL-SORT(G)
+1 call DFS(G) to compute finishing times v.f for each vertex v as each vertex is finished, insert it onto the front of a linked list 
+2 return the linked list of vertices
+```
+
 
 
 # Template for algortihms

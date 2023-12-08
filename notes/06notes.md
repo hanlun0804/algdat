@@ -197,24 +197,62 @@ DFS-VISIT(G,u)
 ```
 
 #### Parentesteoremet
-
+- Forgjenger subgraf $G_\pi$ danner skog av dybde først trær
+- $v_\pi=u$ kun om DFS-VISIT(G,v) er kalt i løpet av søket gjennom nabolisten til $u$. 
+- $v$ er kun etterfølger til $u$ om $v$ ble oppdaget når $u$ var grå
+- Oppdagelses- og fertid-tid har parentesstruktur i DFS
+- Representerer oppdagelsen av verteks $u$ med venstre parentes "$(u$" og representerer at oppdagelse er ferdig med høyre parentes "$u)$". Dette danner velformet uttrykk siden parenteser er riktig nestet
 
 ##### Parentesteoremet (viktig)
-
+- I DFS av graf $G=(V,E)$ for to vertekser $u$ og $v$ vil et av disse være krav:
+    1. Intervallene $[u.d,u.f]$ og $[v.d,v.f]$ er helt atskilte, verken $u$ eller $v$ er etterfølger til den andre i dybde først skogen
+    2. Intervallet $[u.d,u.f]$ er helt innenfor intervallet $[v.d,v.f]$ og $u$ er etterfølger av $v$ i dybde først treet
+    3. Intervallet $[v.d,v.f]$ er helt innenfor intervallet $[u.d,u.f]$ og $v$ er etterfølger av $u$ i dybde først treed
 
 ##### Hvit-bane teoremet
-
+- I dybde først tre vil verteks $v$ være etterfølger til verteks $u$ om banen mellom de kun består av hvite vertekser ved tidspunkt $u.d$, når $u$ oppdages. 
+- Ellers vil $v$ allerede være oppdaget tidligere
 
 #### Klassifisering av kanter
-
+- DFS bruker for å klassifisere kantene til $G=(V,E)$. Type kant gir info om graf.
+    1. Trekanter: kanter i dybde-først skog $G_\pi$. Kanten $(u,v)$ er kun trekant om $v$ oppdages første gang ved å undersøke kanten $(u,v)$
+    2. Bakoverkanter: kanter som kobler verteksen til en forgjenger. Løkker er også bakoverkanter.
+    3. Foroverkanter: kanter utenfor dybde-først skogen som kobler verteks til etterkommer i dybde-først treet
+    4. Krysskanter: alle andre kanter. Kan gå mellom vertekser i samme dybde først tre, så lenge verteks ikke er forgjenger til en annen. Kan også gå mellom vertekser i ulike dybde først trær
+- Farger sier noe om kant
+    1. Hvit $v$ indikerer trekant
+    2. Grå $v$ indikerer bakoverkant
+    3. Sort $v$ indikerer foroverkant ($v.d>u.d$) eller krysskant ($v.d < u.d$)
+- I urettede grafer er en kant den første typen som brukes
 
 ### 22.4 Topologisk sortering
-
-
+- Kan bruke DFS for å utføre topologisk sortering på rettet asyklisk graf (DAG)
+- Topologisk sortering er lineær ordning av alle vertekser, så om $G$ inneholder kant $(u,v)$
+ kommer $u$ før $v$ i ordningen.
+- Slik kant betyr at $u$ blir forgjenger til $v$ i dybde-først treet: $v.f<u.f((u(v v)u))$
+- Slik lineær ordning er ikke mulig om graf inneholder syklus, derav er $G$ en DAG
+- Ordner vertekser langs horisontal lije, fra venstre til høyre 
 ##### TOPOLOGICAL-SORT 
-
+- Topologisk sortering ved DFS
+- Gir vertekser en rekkefølge hvor foreldre plasseres før barna
+- Brukes DFS for å regne ut finishing time til alle vertekser og plasserer verteksene i lenket liste avhengig av tidsstemplene
+- Returnerer lenket liste
+- Kjøretid: $\theta(V+E)$
+```
+TOPOLOGICAL-SORT(G)
+1 call DFS(G) to compute finishing times v.f for each vertex v as each vertex is finished, insert it onto the front of a linked list 
+2 return the linked list of vertices
+```
 
 #### Korrekthet til topologisk sortering
-
+- En rettet graf er asyklisk om DFS ikke gir bakoverkanter 
+- Viser at $v.f<u.f$ når $G$ inneholder kant $(u,v)$
+- Når kant $(u,v)$ undersøkes av DSF er ikke $v$ grå, for da er $v$ forgjenger til $u$. $v$ må være hvit eller sort.
+    - Hvis $v$ er hvit blir den etterfølger av $u$, og $v.f< u.f$. Har vist at $v.f<u.f$ for enhver kant $(u,v)$ når $G$ er en DAG
 
 ## Appendiks E – Generell graftraversering
+- Har sett to traverseringsalgoritmer: BFS og DFS
+- BFS prioriteter de eldste (FIFO)
+- DFS prioriterer de nyeste (LIFO)
+- DIJKSTRA prioriterer noder med lavt avstandsestimat ($v.d$)
+- PRIM prioriterer noder som har lett kant til en av besøkede noder (sorte noder)
