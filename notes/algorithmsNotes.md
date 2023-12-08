@@ -1281,6 +1281,86 @@ TOPOLOGICAL-SORT(G)
 2 return the linked list of vertices
 ```
 
+```
+CONNECTED-COMPONENTS(G)
+1 for each vertex v in G.V
+2    MAKE-SET(v)
+3 for each edge (u,v) in G.E
+4    if FIND-SET(u) != FIND-SET(v)
+5       UNION(u,v)
+```
+
+```
+SAME-COMPONENT(u,v)
+1 if FIND-SET(u) == FIND-SET(v)
+2    return TRUE
+3 else return FALSE
+```
+
+```
+MAKE-SET(x)
+1 x.p = x
+2 x.rank = 0
+```
+
+```
+UNION(x,y)
+1 LINK(FIND-SET(x),FIND-SET(y))
+```
+
+```
+LINK(x,y)
+1 if x.rank > y.rank
+2    y.p = x
+3 else x.p = y
+4    if x.rank == y.rank
+5       y.rank = y.rank + 1 
+```
+
+```
+FIND-SET(x)
+1 if x = x.p
+2    x.p = FIND-SET(x,p)
+3 return x.p
+```
+
+```
+GENERIC-MST(G,w)
+1 A = Ø
+2 while A does not form a spanning tree
+3    find an edge (u,v) that is safe for A
+4    A = A U {(u,v)}
+5 return A
+```
+
+```
+MST-KRUSKAL(G,w)
+1 A = Ø
+2 for each vertex v in G.V
+3    MAKE-SET(v)
+4 sort the edges of G.E into nondecreasing order by weight w 
+5 for each edge (u,v) in G.E, taken in nondecreasing order by weight
+6    if FIND-SET(u) != FIND-SET(v)
+7       A = A U {(u,v)}
+8       UNION(u,v)
+9 return A
+```
+
+```
+MST-PRIM(G,w,r)
+ 1 for each u in G.V
+ 2    u.key = ∞
+ 3    u.pi = NIL
+ 4 r.key = 0
+ 5 Q = G.V
+ 6 while Q != Ø
+ 7    u = EXTRACT-MIN(Q)
+ 8    for each v n G.Adj[u]
+ 9       if v in Q and w(u,v) < v.key
+10          v.pi = u
+11          v.key = w(u,v)
+```
+
 
 
 # Template for algortihms
