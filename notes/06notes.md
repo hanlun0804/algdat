@@ -1,4 +1,11 @@
 # Innhold
+- [Forelesning 8 - Traversering av grafer](#forelesning-8---traversering-av-grafer)
+    - [Kapittel 22 - Elementære grafalgoritmer](#kapittel-22---elementære-grafalgoritmer)
+        - [22.1 Representasjoner av grafer](#221-representasjoner-av-grafer)
+        - [22.2 Bredde-først-søk (BFS)](#222-bredde-først-søk-bfs)
+        - [22.3 Dybde-først-søk (DFS)](#223-dybde-først-søk-dfs)
+        - [22.4 Topologisk sortering](#224-topologisk-sortering)
+    - [Appendiks E – Generell graftraversering](#appendiks-e-–-generell-graftraversering)
 
 
 # Forelesning 8 - Traversering av grafer
