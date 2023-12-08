@@ -21,8 +21,8 @@ I learned a lot about the sorting algorithm from trying to sort cards according 
 |[03.12](notes/03notes.md)             |Posted      |Rooted tree structures |
 |[04.12](notes/04notes.md)             |Posted      |Dynamic programming    |
 |[05.12](notes/05notes.md)             |Posted      |Greedy algorithms      |
-|[06.12](notes/06notes.md)             |In progress |Traversing graphs      |
-|[07.12](notes/07notes.md)             |Not reviewed|                       |
+|[06.12](notes/06notes.md)             |Posted      |Traversing graphs      |
+|[07.12](notes/07notes.md)             |In progress |Minimal trees          |
 |[08.12](notes/08notes.md)             |Not reviewed|                       |
 |[09.12](notes/09notes.md)             |Not reviewed|                       |
 |[10.12](notes/10notes.md)             |Not reviewed|                       |
