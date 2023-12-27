@@ -9,6 +9,8 @@ I am also planning on having a seperate section for all algorithms in our curric
 ## Good takeaways
 I learned a lot about the sorting algorithm from trying to sort cards according to the pseudocode. Highly recommend!
 
+I am now with the exam, and as you can see, I did not post notes for every topic. Time got the best of me, so towards the end I did not focus on writing "postable notes". I rather discussed with my fellow students and solved problems to understand the concepts. However, I believe the exam went well, and it has been an interesting course to have. I went into it believing it would not be my best course, but when I started understanding the material more I found it more and more interesting. I am looking forward to seeing more of the practical usecases for this subject. 
+
 ## Notes
 |Notes                                 |Status      |Topic                               |
 |--------------------------------------|------------|------------------------------------|
@@ -32,3 +34,7 @@ I learned a lot about the sorting algorithm from trying to sort cards according 
 Here I will post the people who has particularly helped me, and links to their work if applicable and/or if I get their permission to.
 
 First shoutout goes to an anonymous hero for writing a great compendium. I am basing most of my Norwegian notes on their compendium, and have been allowed to post my notes. Contact me if you want the compendium, at hanlun0804@outlook.com.
+
+The lecturer of this course, Magnus Lie Hetland, has been one of my favorite lecuturers. It was clear that he was passionate about the subject and teaching it to others. He also always answered questions, either in the lectures, in breaks, after lectures or in an email.
+
+Abdul Bari explain concepts very well. They are not necessarily always the same as what the learning objectives require, but I think he is worth checking out: https://www.youtube.com/@abdul_bari
